@@ -9,6 +9,10 @@ import themes from '@styles/themes/themes';
 import GlobalStyle from '@styles/globalstyles/GlobalStyle';
 import Layout from '@components/layout/Layout';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks');
+}
+
 const queryClient = new QueryClient();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
