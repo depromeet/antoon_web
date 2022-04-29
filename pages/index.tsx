@@ -25,8 +25,6 @@ const Home = ({
      /_/  |_|/_/  |/  /__/   \\____/ \\____/ /_/  |/ ',
   );
 
-  console.log('props', product);
-
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const handleGetReview = () => {
