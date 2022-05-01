@@ -1,4 +1,4 @@
-import type { InferGetServerSidePropsType, NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import { default as _Home } from '@domains/webtoon/home/Home';
 import Header from '@components/layout/Header';
 import { useState } from 'react';
@@ -55,6 +55,8 @@ const Home = ({
 };
 
 export async function getServerSideProps() {
+  console.log(process.env.NEXT_PUBLIC_API_MOCKING || 'mock error');
+
   const res = await fetch('https://example.com/products/22');
   const product: Product = await res.json();
 
