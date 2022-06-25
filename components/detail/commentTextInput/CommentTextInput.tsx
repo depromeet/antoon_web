@@ -23,8 +23,10 @@ import LoadingSpinner from '@components/spinner/LoadingSpinner';
 import OnError from '@components/OnError';
 
 interface Props {
-  length: number;
-  webtoonId: number;
+  length?: number;
+  webtoonId?: number;
+  discussionId?: number;
+  editStatus?: boolean;
 }
 
 function CommentTextInput(props: Props) {
@@ -41,7 +43,7 @@ function CommentTextInput(props: Props) {
     isSuccess,
     error,
     mutate: postData,
-  } = usePostCommentsById(props.webtoonId, content);
+  } = usePostCommentsById(Number(props.webtoonId), content);
 
   useEffect(() => {
     if (content.length >= MAX_LENGTH_CONTENT && textareaRef.current?.focus())
@@ -53,7 +55,7 @@ function CommentTextInput(props: Props) {
 
   const placeHolderText =
     Number(props.length) > 0
-      ? `${props.length + 1}번째 행진에 동참해 보세요!`
+      ? `${Number(props.length) + 1}번째 행진에 동참해 보세요!`
       : '첫 번째 행진에 동참해 보세요!';
 
   const ContentCheckHandler = useCallback(
@@ -81,6 +83,12 @@ function CommentTextInput(props: Props) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    if (props.editStatus) {
+      setFocused(true);
+    }
+  }, [props.editStatus]);
 
   if (isError) return <OnError>로그인이 필요합니다.</OnError>;
 
