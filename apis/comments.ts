@@ -44,6 +44,36 @@ const usePostCommentsById = (id: number, content: string) => {
   );
 };
 
+const patchCommentsById = async (id: number, content: string) => {
+  return await instance()
+    .post(`webtoons/discussions/${id}`, { content: content })
+    .catch((e) => console.log(e));
+};
+
+const usePatchCommentsById = (id: number, content: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    comments.patch(id, content),
+    () => patchCommentsById(id, content),
+    {
+      onSuccess: () => queryClient.invalidateQueries(comments.lists(id)),
+    },
+  );
+};
+
+const deleteCommentsById = async (id: number) => {
+  return await instance()
+    .delete(`webtoons/discussions/${id}`)
+    .catch((e) => console.log(e));
+};
+
+const useDeleteCommentsById = (id: number) => {
+  const queryClient = useQueryClient();
+  return useMutation(comments.delete(id), () => deleteCommentsById(id), {
+    onSuccess: () => queryClient.invalidateQueries(comments.lists(id)),
+  });
+};
+
 export {
   getCommentsById,
   useGetCommentsById,
@@ -51,4 +81,6 @@ export {
   usePutCommentsLikedById,
   postCommentsById,
   usePostCommentsById,
+  usePatchCommentsById,
+  useDeleteCommentsById,
 };

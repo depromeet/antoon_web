@@ -16,13 +16,18 @@ const CommentWrap = styled.div`
 
 const MainWrap = styled.div`
   margin: 0 0 0 1.2rem;
+  width: 100%;
 `;
 
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 0 0 0.8rem;
+  width: 100%;
 `;
+
+const UserInfoDataWrap = styled.div``;
 
 const Name = styled.span`
   margin: 0 0.8rem 0 0;
@@ -37,6 +42,15 @@ const TimeStamp = styled.span`
 
 const Content = styled.div`
   margin: 0 0 1.2rem;
+  font-size: 1.4rem;
+`;
+
+const EditContent = styled.input`
+  margin: 0 0 1.2rem;
+  border-radius: 1.2rem;
+  background-color: ${(props) => props.theme.colors.grayscale.gray_100};
+  padding: 1.6rem;
+  width: 100%;
   font-size: 1.4rem;
 `;
 
@@ -58,9 +72,11 @@ export {
   CommentWrap,
   MainWrap,
   UserInfo,
+  UserInfoDataWrap,
   Name,
   TimeStamp,
   Content,
+  EditContent,
   FavoriteWrap,
   Favorite,
 };
